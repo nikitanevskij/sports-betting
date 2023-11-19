@@ -1,0 +1,26 @@
+.betting-card__block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  column-gap: 60px;
+}
+
+.betting-card__chooice {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.betting-card__chooice .ant-radio-wrapper {
+  flex-direction: column;
+}
+
+.betting-card__chooice button {
+  max-width: 170px;
+  margin: 0 auto;
+}
+
+.betting-card__text {
+  color: black;
+}
