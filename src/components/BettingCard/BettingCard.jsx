@@ -1,13 +1,14 @@
 import { Button, Radio } from "antd";
 import React from "react";
 import "./BettingCard.css";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
-export const BettingCard = ({ data, userBetting }) => {
+export const BettingCard = ({ data, setUserBetting }) => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [value, setValue] = React.useState();
   const [disabled, setDisabled] = React.useState(true);
   const [card, setCard] = React.useState();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const findCard = (params) => {
@@ -26,8 +27,14 @@ export const BettingCard = ({ data, userBetting }) => {
   };
 
   const submit = () => {
-    // const findBet = userBetting && userBetting[0].betting.findIndex((item) => item.id === id);
+    const bet = {
+      id: id,
+      item: `Спасибо, ваша ставка МАТЧ ${card.nameOne.toUpperCase()} - ${card.nameTwo.toUpperCase()}, СТАВКА ${value.toUpperCase()} принята`,
+    };
+    setUserBetting(bet);
+    navigate("/");
   };
+
   if (isLoading) {
     return <h2 className="betting-card__text">Loading...</h2>;
   }
@@ -45,9 +52,9 @@ export const BettingCard = ({ data, userBetting }) => {
         </div>
         <div className="betting-card__chooice">
           <Radio.Group onChange={onChange} value={value} className={{ rowGap: "20px" }}>
-            <Radio value={1}>победа хозяев</Radio>
-            <Radio value={2}>ничья</Radio>
-            <Radio value={3}>победа гостей</Radio>
+            <Radio value={"победа хозяев"}>победа хозяев</Radio>
+            <Radio value={"ничья"}>ничья</Radio>
+            <Radio value={"победа гостей"}>победа гостей</Radio>
           </Radio.Group>
           <Button type="primary" onClick={submit} style={{ marginTop: 16 }} disabled={disabled}>
             Сделать ставку

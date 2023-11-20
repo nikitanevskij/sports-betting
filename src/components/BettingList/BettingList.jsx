@@ -1,4 +1,3 @@
-import React from "react";
 import "./BettingList.css";
 import { List } from "antd";
 import { Link } from "react-router-dom";
